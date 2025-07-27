@@ -8,4 +8,33 @@
 <h2>Releases</h2>
 <p><a href="10_0_1.html">v10.0.1 (July 27 2025)</a></p>
 <p><a href="10_0_0.html">v10.0.0 (April 12 2025)</a></p>
+<h2>Join the 9License Newsletter!</h2>
+<p>Every time a new release of 9License comes out, we'll send an email to you with a link to the update.</p>
+  <form id="emailForm">
+    <input type="email" id="email" required placeholder="Enter your email">
+    <button type="submit">Submit</button>
+  </form>
+  <p id="response"></p>
+
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+
+      fetch('submit.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'email=' + encodeURIComponent(email)
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('response').innerText = data;
+      })
+      .catch(err => {
+        document.getElementById('response').innerText = 'Error submitting email.';
+      });
+    });
+  </script>
 </html>
